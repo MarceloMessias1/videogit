@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 public class Youtube {
 
@@ -16,24 +18,26 @@ public class Youtube {
 
 	@After
 	public void tearDown() throws Exception {
-		// metodos.encerrarSistema();
+		metodos.encerrarSistema();
 	}
 
 	@Test
 	public void pesquisarMusica() throws InterruptedException {
-		String texto = "";// texto da musica
 		By pesquisar = By.name("search_query");
-		//By iconePesquisar = By.xpath("");
 		Thread.sleep(4000);
 		By clicaMusica = By.xpath("//*[@id=\"search-icon-legacy\"]");
+
 		Thread.sleep(4000);
-		By clicarClipe = By.xpath("//*[text()='UMA NOVA HISTÓRIA - FERNANDINHO [CLIPE OFICIAL]']");
-		By tituloMusica = By.xpath("");
+
+		By validarMusica = By.xpath("//*[@id='corrected']']");
+
 
 		metodos.escrever(pesquisar, "fernandinho");
 		metodos.clicarMusica(clicaMusica);
-		metodos.clicarClipe (clicarClipe);
-//		metodos.validarmusica(tituloMusica, texto);
+		metodos.clicarMusica(validarMusica);
+
+		String texto = "FERNANDINHO | GALILEU | CLIPE OFICIAL";// texto
+		metodos.validarmusica(validarMusica, texto);
 
 	}
 }

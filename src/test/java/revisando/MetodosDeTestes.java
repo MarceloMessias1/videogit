@@ -9,6 +9,7 @@ import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class MetodosDeTestes {
@@ -48,6 +49,9 @@ public class MetodosDeTestes {
 	
 	public void validarmusica(By elemento, String texto) {
 		String textoEsperado = driver.findElement(elemento).getText();
+		JavascriptExecutor executor =(JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click()", elemento);
+
 		assertEquals(texto, textoEsperado);
 	}
 	public void scrollNatela() {
@@ -84,7 +88,7 @@ public class MetodosDeTestes {
 	}
 
 	public void clicarClipe(By elemento) {
-		driver.findElement(elemento).click();		
+		driver.findElement(elemento).click();	
 	}
 
 }
