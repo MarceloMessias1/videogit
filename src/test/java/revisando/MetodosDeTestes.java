@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -46,14 +47,13 @@ public class MetodosDeTestes {
 		String textoEsperado = driver.findElement(elemento).getText();
 		assertEquals(texto, textoEsperado);
 	}
-	
+
 	public void validarmusica(By elemento, String texto) {
 		String textoEsperado = driver.findElement(elemento).getText();
-		JavascriptExecutor executor =(JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click()", elemento);
-
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		assertEquals(texto, textoEsperado);
 	}
+
 	public void scrollNatela() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("scroll(0,5000)");
@@ -88,7 +88,7 @@ public class MetodosDeTestes {
 	}
 
 	public void clicarClipe(By elemento) {
-		driver.findElement(elemento).click();	
+		driver.findElement(elemento).click();
 	}
 
 }

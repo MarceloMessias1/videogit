@@ -31,10 +31,8 @@ public class Youtube {
 
 		By validarMusica = By.xpath("//*[@id='corrected']']");
 
-
 		metodos.escrever(pesquisar, "fernandinho");
 		metodos.clicarMusica(clicaMusica);
-		metodos.clicarMusica(validarMusica);
 
 		String texto = "FERNANDINHO | GALILEU | CLIPE OFICIAL";// texto
 		metodos.validarmusica(validarMusica, texto);

@@ -10,10 +10,17 @@ import org.openqa.selenium.By;
 public class Correios {
 
 	MetodosDeTestes metodo = new MetodosDeTestes();
+	
 	By buscarCep = By.id("relaxation");
 	String cep = "06463010";
 	By lupa = By.cssSelector("#content > div.mais-acessados > div > div:nth-child(2) > form > div.campo > button > i");
-	By todoEnderecoTexto = By.xpath("");
+	By todoEnderecoTexto = By.xpath("//*[@id=\"resultado-DNEC\"]//td[1]");
+
+	By validarBairro = By.xpath("//*[@id=\"resultado-DNEC\"]//td[2]");
+
+	By validaCidade = By.xpath("//*[@id=\"resultado-DNEC\"]//td[3]");
+
+	By validaCep = By.xpath("//*[@id=\"resultado-DNEC\"]//td[4]");
 
 	@Before
 	public void setUp() throws Exception {
@@ -30,33 +37,41 @@ public class Correios {
 
 	@Test
 	public void validarInformacoesCompleta() {
-		
+
 		String enderecoCompleto = "Rua Vertentes";
 		metodo.escrever(buscarCep, cep);
 		metodo.clicar(lupa);
 		metodo.mudarAba();
 		metodo.validarMensagem(todoEnderecoTexto, enderecoCompleto);
+		metodo.encerrarSistema();
 	}
 
 	@Test
-	public void validarInformacoesSeparada() {
-		By logradouro_Nome_elemento = By.id("relaxation");
-		By bairro_Distrito_elemento = By.xpath("//*[text()='Logradouro/Nome']");
-		By localidade_UF_elemento = By.cssSelector("#resultado-DNEC > tbody > tr > td:nth-child(3)");
-//		By cEP_elemento = By.xpath("//*[@id=\"resultado-DNEC\"]//td[4]");
-
-		String logradouro_Nome = "Rua Vertentes";
-		String bairro_Distrito = 	"Jardim Mutinga";
-		String localidade_UF = "Barueri/SP";
-		String cEP = "06463-010";
-//		metodo.escrever(cEP_elemento, cep);
+	public void validarBairro() {
+		String bairro = "Jardim Mutinga";
+		metodo.escrever(buscarCep, cep);
 		metodo.clicar(lupa);
 		metodo.mudarAba();
-		metodo.validarMensagem(logradouro_Nome_elemento, logradouro_Nome);
-		metodo.validarMensagem(bairro_Distrito_elemento, bairro_Distrito);
-		metodo.validarMensagem(localidade_UF_elemento, localidade_UF);
-	//	metodo.validarMensagem(cEP_elemento, cEP);
+		metodo.validarMensagem(validarBairro, bairro);
 
 	}
 
+	@Test
+	public void validaCidade() {
+		String cidade = "Barueri/SP";
+		metodo.escrever(buscarCep, cep);
+		metodo.clicar(lupa);
+		metodo.mudarAba();
+		metodo.validarMensagem(validaCidade, cidade);
+	}
+
+	@Test
+	public void ValidarCEp() {
+		String cep = "06463-010";
+		metodo.escrever(buscarCep, cep);
+		metodo.clicar(lupa);
+		metodo.mudarAba();
+		metodo.validarMensagem(validaCep, cep);
+
+	}
 }
